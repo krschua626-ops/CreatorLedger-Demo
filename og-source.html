@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1200" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+      font-family: 'Inter', sans-serif;
+      background: #FFFFFF;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── BACKGROUND GRID ── */
+    .bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, #F0F0F2 1px, transparent 1px),
+        linear-gradient(to bottom, #F0F0F2 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 80% at 70% 50%, rgba(255,255,255,0.0) 0%, #FFFFFF 80%);
+    }
+
+    /* ── BLUE ACCENT BAR ── */
+    .accent-bar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: #0F7AFF;
+    }
+
+    /* ── LAYOUT ── */
+    .layout {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      padding: 48px 64px;
+      gap: 56px;
+    }
+
+    /* ── LEFT SIDE ── */
+    .left {
+      flex: 0 0 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+    .logo-icon {
+      width: 38px; height: 38px;
+      background: #0F7AFF;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+    }
+    .logo-name {
+      font-size: 20px;
+      font-weight: 800;
+      color: #1A1A1A;
+      letter-spacing: -0.5px;
+    }
+    .headline {
+      font-size: 46px;
+      font-weight: 900;
+      color: #1A1A1A;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+    .headline em {
+      font-style: normal;
+      color: #0F7AFF;
+    }
+    .sub {
+      font-size: 17px;
+      color: #6B7280;
+      line-height: 1.6;
+      margin-bottom: 36px;
+      font-weight: 400;
+    }
+    .stat-row {
+      display: flex;
+      gap: 10px;
+    }
+    .stat-pill {
+      background: #F7F7F8;
+      border: 1px solid #E8E8E8;
+      border-radius: 100px;
+      padding: 7px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #6B7280;
+    }
+    .stat-pill strong { color: #1A1A1A; font-weight: 700; }
+
+    /* ── RIGHT SIDE — DASHBOARD CARD ── */
+    .right {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .dashboard-card {
+      background: #FFFFFF;
+      border: 1px solid #E8E8E8;
+      border-radius: 18px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.04), 0 20px 60px rgba(0,0,0,0.10);
+      overflow: hidden;
+      width: 540px;
+    }
+
+    /* Window chrome */
+    .chrome {
+      background: #F7F7F8;
+      border-bottom: 1px solid #E8E8E8;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .chrome-dots { display: flex; gap: 6px; }
+    .chrome-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .chrome-url {
+      flex: 1;
+      background: #fff;
+      border: 1px solid #E8E8E8;
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: 11px;
+      color: #9CA3AF;
+      font-family: monospace;
+      text-align: center;
+      margin: 0 12px;
+    }
+
+    /* Dashboard body */
+    .dash-body {
+      display: grid;
+      grid-template-columns: 152px 1fr;
+    }
+
+    /* Sidebar */
+    .dash-sidebar {
+      background: #F7F7F8;
+      border-right: 1px solid #E8E8E8;
+      padding: 16px 12px;
+    }
+    .ds-logo {
+      font-size: 12px;
+      font-weight: 800;
+      color: #1A1A1A;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      margin-bottom: 14px;
+    }
+    .ds-logo-icon {
+      width: 18px; height: 18px;
+      background: #0F7AFF;
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      font-size: 9px;
+      font-weight: 900;
+    }
+    .ds-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .ds-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 9px;
+      border-radius: 7px;
+      font-size: 11px;
+      font-weight: 500;
+      color: #9CA3AF;
+    }
+    .ds-item.active {
+      background: #FFFFFF;
+      color: #1A1A1A;
+      font-weight: 600;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .ds-month {
+      margin-top: 16px;
+      background: #fff;
+      border: 1px solid #E8E8E8;
+      border-radius: 8px;
+      padding: 9px 10px;
+    }
+    .ds-month-label { font-size: 9px; color: #9CA3AF; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
+    .ds-month-val { font-size: 11px; font-weight: 700; color: #16A34A; margin-top: 2px; }
+
+    /* Main content */
+    .dash-main {
+      padding: 16px;
+    }
+    .dash-greeting {
+      font-size: 12px;
+      font-weight: 700;
+      color: #1A1A1A;
+      margin-bottom: 12px;
+    }
+    .stat-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .sc {
+      background: #F7F7F8;
+      border: 1px solid #E8E8E8;
+      border-radius: 9px;
+      padding: 10px 12px;
+    }
+    .sc.blue {
+      background: #0F7AFF;
+      border-color: #0F7AFF;
+    }
+    .sc-label {
+      font-size: 9px;
+      font-weight: 700;
+      color: #9CA3AF;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-bottom: 3px;
+    }
+    .sc.blue .sc-label { color: rgba(255,255,255,0.7); }
+    .sc-val {
+      font-size: 17px;
+      font-weight: 800;
+      color: #1A1A1A;
+      letter-spacing: -0.5px;
+    }
+    .sc.blue .sc-val { color: #fff; }
+    .sc-delta {
+      font-size: 10px;
+      color: #16A34A;
+      font-weight: 500;
+      margin-top: 2px;
+    }
+    .sc.blue .sc-delta { color: rgba(255,255,255,0.8); }
+
+    /* Platform bars */
+    .bars-label {
+      font-size: 9px;
+      font-weight: 700;
+      color: #9CA3AF;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 9px;
+    }
+    .bar-r {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 7px;
+    }
+    .bar-icon {
+      width: 20px; height: 20px;
+      border-radius: 5px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+    .bar-name {
+      width: 62px;
+      font-size: 10px;
+      font-weight: 500;
+      color: #6B7280;
+      flex-shrink: 0;
+    }
+    .bar-track {
+      flex: 1;
+      height: 5px;
+      background: #E8E8E8;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .bar-fill { height: 100%; border-radius: 3px; }
+    .bar-amt {
+      width: 40px;
+      text-align: right;
+      font-size: 10px;
+      font-weight: 700;
+      color: #1A1A1A;
+      flex-shrink: 0;
+    }
+
+    /* Floating badges */
+    .badge-tax {
+      position: absolute;
+      right: 88px;
+      bottom: 72px;
+      background: #fff;
+      border: 1px solid #E8E8E8;
+      border-radius: 10px;
+      padding: 10px 14px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    }
+    .badge-deal {
+      position: absolute;
+      right: 76px;
+      top: 108px;
+      background: #fff;
+      border: 1px solid #E8E8E8;
+      border-radius: 10px;
+      padding: 10px 14px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    }
+    .badge-label { font-size: 10px; color: #9CA3AF; font-weight: 500; }
+    .badge-val { font-size: 15px; font-weight: 800; color: #1A1A1A; margin-top: 1px; }
+    .badge-sub { font-size: 10px; font-weight: 600; margin-top: 1px; }
+    .badge-sub.amber { color: #D97706; }
+    .badge-sub.green { color: #16A34A; }
+  </style>
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="accent-bar"></div>
+
+  <div class="layout">
+    <!-- LEFT -->
+    <div class="left">
+      <div class="logo">
+        <div class="logo-icon">CL</div>
+        <div class="logo-name">CreatorLedger</div>
+      </div>
+      <h1 class="headline">Your financial<br><em>command center.</em></h1>
+      <p class="sub">Every platform. Every payout.<br>Every brand deal. One dashboard.</p>
+      <div class="stat-row">
+        <div class="stat-pill"><strong>2 min</strong> full income view</div>
+        <div class="stat-pill"><strong>$2,160</strong> avg deductions found</div>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right" style="position:relative">
+      <div class="dashboard-card">
+        <!-- Chrome -->
+        <div class="chrome">
+          <div class="chrome-dots">
+            <div class="chrome-dot" style="background:#FF5F57"></div>
+            <div class="chrome-dot" style="background:#FFBD2E"></div>
+            <div class="chrome-dot" style="background:#28CA41"></div>
+          </div>
+          <div class="chrome-url">app.creatorledger.com/dashboard</div>
+        </div>
+        <!-- Body -->
+        <div class="dash-body">
+          <!-- Sidebar -->
+          <div class="dash-sidebar">
+            <div class="ds-logo">
+              <div class="ds-logo-icon">CL</div>
+              CreatorLedger
+            </div>
+            <div class="ds-nav">
+              <div class="ds-item active">📊 Dashboard</div>
+              <div class="ds-item">🧾 Tax</div>
+              <div class="ds-item">📈 Profitability</div>
+              <div class="ds-item">🤝 Sponsorships</div>
+            </div>
+            <div class="ds-month">
+              <div class="ds-month-label">April 2026</div>
+              <div class="ds-month-val">↑ Best month yet</div>
+            </div>
+          </div>
+          <!-- Main -->
+          <div class="dash-main">
+            <div class="dash-greeting">Good morning, Alex 👋</div>
+            <div class="stat-cards">
+              <div class="sc blue">
+                <div class="sc-label">Total Earned</div>
+                <div class="sc-val">$18,420</div>
+                <div class="sc-delta">↑ 23% vs last month</div>
+              </div>
+              <div class="sc">
+                <div class="sc-label">Net Profit</div>
+                <div class="sc-val">$13,490</div>
+                <div class="sc-delta" style="color:#9CA3AF">73% margin</div>
+              </div>
+            </div>
+            <div class="bars-label">Revenue by Platform</div>
+            <div class="bar-r">
+              <div class="bar-icon" style="background:#FFF0F0">🎬</div>
+              <div class="bar-name">YouTube</div>
+              <div class="bar-track"><div class="bar-fill" style="width:62%;background:#FF6B6B"></div></div>
+              <div class="bar-amt">$7,850</div>
+            </div>
+            <div class="bar-r">
+              <div class="bar-icon" style="background:#F0FDF4">🤝</div>
+              <div class="bar-name">Sponsorships</div>
+              <div class="bar-track"><div class="bar-fill" style="width:38%;background:#22C55E"></div></div>
+              <div class="bar-amt">$5,500</div>
+            </div>
+            <div class="bar-r">
+              <div class="bar-icon" style="background:#FFF7ED">🟠</div>
+              <div class="bar-name">Patreon</div>
+              <div class="bar-track"><div class="bar-fill" style="width:22%;background:#F97316"></div></div>
+              <div class="bar-amt">$2,820</div>
+            </div>
+            <div class="bar-r">
+              <div class="bar-icon" style="background:#F5F3FF">🎮</div>
+              <div class="bar-name">Twitch</div>
+              <div class="bar-track"><div class="bar-fill" style="width:10%;background:#9146FF"></div></div>
+              <div class="bar-amt">$1,250</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating badges -->
+      <div class="badge-tax">
+        <div class="badge-label">Q2 Tax Due</div>
+        <div class="badge-val">$4,605</div>
+        <div class="badge-sub amber">Jun 15 · 71 days</div>
+      </div>
+      <div class="badge-deal">
+        <div class="badge-label">NordVPN Deal</div>
+        <div class="badge-val">$4,000</div>
+        <div class="badge-sub green">Invoice sent ✓</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
