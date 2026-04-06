@@ -114,12 +114,13 @@
     .fb-sub.green { color: var(--green); }
 
     /* SOCIAL PROOF */
-    #social { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg-2); padding: 20px 40px; display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
-    #social p { font-size: 13px; color: var(--text-3); font-weight: 500; white-space: nowrap; }
-    .social-divider { width: 1px; height: 20px; background: var(--border); }
-    .stat-pills { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-    .stat-pill { background: #fff; border: 1px solid var(--border); border-radius: 100px; padding: 5px 14px; font-size: 13px; color: var(--text-2); font-weight: 500; }
-    .stat-pill strong { color: var(--text); font-weight: 700; }
+    #social { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg-2); padding: 44px 40px; }
+    .social-inner { max-width: 960px; margin: 0 auto; text-align: center; }
+    .social-lead { font-size: 12px; color: var(--text-3); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 28px; }
+    .stat-pills { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+    .stat-pill { background: #fff; padding: 24px 20px; text-align: center; }
+    .stat-pill strong { display: block; font-size: 32px; font-weight: 900; color: var(--text); letter-spacing: -1.5px; line-height: 1; margin-bottom: 6px; }
+    .stat-pill span { display: block; font-size: 13px; color: var(--text-2); font-weight: 500; line-height: 1.4; }
 
     /* SHARED SECTION */
     section { padding: 96px 40px; }
@@ -294,12 +295,22 @@
       .p-cards { grid-template-columns: repeat(2,1fr); }
     }
     @media (max-width: 640px) {
+      body { overflow-x: hidden; }
       section { padding: 64px 20px; }
-      nav { padding: 0 20px; }
+      nav { padding: 0 16px; }
       .nav-links { display: none; }
+      .nav-ghost { display: none; }
+      .nav-cta { font-size: 13px; padding: 7px 13px; white-space: nowrap; }
+      h1 { font-size: clamp(28px, 8vw, 36px); letter-spacing: -0.5px; word-break: break-word; }
+      .hero-sub { font-size: 15px; }
+      .hero-form { flex-direction: column; }
+      .hero-btn { width: 100%; text-align: center; }
+      .platform-pills { gap: 5px; }
       .waitlist-card { padding: 28px 20px; }
       footer { padding: 20px; }
       .demo-scenarios { grid-template-columns: 1fr; }
+      #social { padding: 36px 20px; }
+      .stat-pills { grid-template-columns: repeat(2,1fr); }
     }
   </style>
 </head>
@@ -383,13 +394,14 @@
 </section>
 
 <div id="social">
-  <p>Built for creators who earn across</p>
-  <div class="social-divider"></div>
-  <div class="stat-pills">
-    <div class="stat-pill"><strong>2 min</strong> to see everything you earned</div>
-    <div class="stat-pill"><strong>$2,160</strong> avg tax deductions found</div>
-    <div class="stat-pill"><strong>Zero</strong> tax surprises at year end</div>
-    <div class="stat-pill"><strong>1 place</strong> for every platform you earn from</div>
+  <div class="social-inner">
+    <p class="social-lead">Built for creators who earn across multiple platforms</p>
+    <div class="stat-pills">
+      <div class="stat-pill"><strong>2 min</strong><span>to see everything you earned</span></div>
+      <div class="stat-pill"><strong>$2,160</strong><span>avg tax deductions found</span></div>
+      <div class="stat-pill"><strong>Zero</strong><span>tax surprises at year end</span></div>
+      <div class="stat-pill"><strong>1 place</strong><span>for every platform you earn from</span></div>
+    </div>
   </div>
 </div>
 
@@ -469,10 +481,10 @@
     <h2 class="section-title fade-up">Everything you need.<br>Nothing you don't.</h2>
     <p class="section-sub fade-up">Purpose-built for the creator workflow — not retrofitted from software designed for law firms.</p>
     <div class="feat-grid">
-      <div class="feat-card fade-up"><div class="feat-icon-wrap" style="background:#EFF6FF">📊</div><div class="feat-title">Unified Revenue Dashboard</div><div class="feat-desc">Every platform. Every payout. One screen. See your total income across YouTube, Patreon, Twitch, TikTok, and sponsorships with historical trends and month-over-month comparisons.</div><a class="feat-link" href="#demo">See it in action →</a></div>
-      <div class="feat-card fade-up" style="transition-delay:.05s"><div class="feat-icon-wrap" style="background:#FFFBEB">🧾</div><div class="feat-title">Tax Intelligence</div><div class="feat-desc">Auto-calculated quarterly estimated taxes from real income data — and it finds every deduction you're entitled to claim. No more guessing what you'll owe at year end.</div><a class="feat-link" href="#demo">See it in action →</a></div>
-      <div class="feat-card fade-up" style="transition-delay:.1s"><div class="feat-icon-wrap" style="background:#F0FDF4">📈</div><div class="feat-title">Platform Profitability</div><div class="feat-desc">Gross revenue is vanity. Net profit is sanity. See what each platform earns after fees and costs — stop optimizing for views and start optimizing for what actually pays.</div><a class="feat-link" href="#demo">See it in action →</a></div>
-      <div class="feat-card fade-up" style="transition-delay:.15s"><div class="feat-icon-wrap" style="background:#F5F3FF">🤝</div><div class="feat-title">Sponsorship Tracker</div><div class="feat-desc">59% of creator revenue is brand deals — yet most creators track them in a notes app. Log deals, set payment terms, generate invoices, and get automatic overdue reminders.</div><a class="feat-link" href="#demo">See it in action →</a></div>
+      <div class="feat-card fade-up"><div class="feat-icon-wrap" style="background:#EFF6FF">📊</div><div class="feat-title">Unified Revenue Dashboard</div><div class="feat-desc">Every platform. Every payout. One screen. See your total income across YouTube, Patreon, Twitch, TikTok, and sponsorships with historical trends and month-over-month comparisons.</div><a class="feat-link" href="#demo" onclick="goToScene(0);return false;">See it in action →</a></div>
+      <div class="feat-card fade-up" style="transition-delay:.05s"><div class="feat-icon-wrap" style="background:#FFFBEB">🧾</div><div class="feat-title">Tax Intelligence</div><div class="feat-desc">Auto-calculated quarterly estimated taxes from real income data — and it finds every deduction you're entitled to claim. No more guessing what you'll owe at year end.</div><a class="feat-link" href="#demo" onclick="goToScene(1);return false;">See it in action →</a></div>
+      <div class="feat-card fade-up" style="transition-delay:.1s"><div class="feat-icon-wrap" style="background:#F0FDF4">📈</div><div class="feat-title">Platform Profitability</div><div class="feat-desc">Gross revenue is vanity. Net profit is sanity. See what each platform earns after fees and costs — stop optimizing for views and start optimizing for what actually pays.</div><a class="feat-link" href="#demo" onclick="goToScene(2);return false;">See it in action →</a></div>
+      <div class="feat-card fade-up" style="transition-delay:.15s"><div class="feat-icon-wrap" style="background:#F5F3FF">🤝</div><div class="feat-title">Sponsorship Tracker</div><div class="feat-desc">59% of creator revenue is brand deals — yet most creators track them in a notes app. Log deals, set payment terms, generate invoices, and get automatic overdue reminders.</div><a class="feat-link" href="#demo" onclick="goToScene(3);return false;">See it in action →</a></div>
     </div>
   </div>
 </section>
@@ -572,6 +584,14 @@
 
 <script>
   const urls = ['app.creatorledger.com/dashboard','app.creatorledger.com/tax','app.creatorledger.com/profitability','app.creatorledger.com/sponsorships'];
+  function goToScene(idx) {
+    document.getElementById('demo').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    userDid = true; clearInterval(autoTimer);
+    setTimeout(function() {
+      var btns = document.querySelectorAll('.scenario-btn');
+      showScenario(idx, btns[idx]);
+    }, 450);
+  }
   function showScenario(idx, btn) {
     document.querySelectorAll('.scenario-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.demo-panel').forEach(p => p.classList.remove('active'));
